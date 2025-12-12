@@ -1,15 +1,50 @@
-$fuente_principal : "Montserrat", sans-serif;
+$fuente_principal : "Montserrat",
+sans-serif;
 
-// Colores
-$verde:#4CB8B3;
-$rosa: #F53756;
-$amarillo: #fdda00;
-$morado: #752F97;
-$negro: #000000;
-$blanco: #FFFFFF;
+// Colores Premium EDM Festival
+$primary: #8B5CF6; // Púrpura vibrante
+$primary-dark: #6D28D9; // Púrpura oscuro
+$secondary: #06B6D4; // Cyan moderno
+$secondary-dark: #0891B2;
+$accent: #F59E0B; // Ámbar para CTAs
+$neon-pink: #EC4899; // Rosa neón
+$neon-pink-dark: #DB2777;
+
+// Colores de superficie
+$dark: #0F0F23; // Fondo principal oscuro
+$dark-surface: #1a1a2e; // Superficies elevadas
+$dark-card: #16213e; // Cards
+$light: #F8FAFC;
+$light-muted: #94A3B8;
+
+// Colores legacy (mantener compatibilidad)
+$verde: $secondary;
+$rosa: $neon-pink;
+$amarillo: $accent;
+$morado: $primary;
+$negro: $dark;
+$blanco: $light;
+
+// Gradientes
+$gradient-primary: linear-gradient(135deg, $primary, $neon-pink);
+$gradient-secondary: linear-gradient(135deg, $secondary, $primary);
+$gradient-hero: linear-gradient(135deg, rgba($primary-dark, 0.95), rgba($neon-pink-dark, 0.8));
+$gradient-card: linear-gradient(145deg, rgba($dark-card, 0.8), rgba($dark-surface, 0.9));
+
+// Sombras
+$shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+$shadow-md: 0 4px 20px rgba(0, 0, 0, 0.4);
+$shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.5);
+$shadow-glow: 0 0 30px rgba($primary, 0.4);
+$shadow-neon: 0 0 20px rgba($neon-pink, 0.5);
 
 // Media Queries
 $telefono: 480px;
 $tablet: 768px;
 $desktop: 1200px;
 $desktopXL: 1400px;
+
+// Transiciones
+$transition-fast: 0.2s ease;
+$transition-normal: 0.3s ease;
+$transition-slow: 0.5s ease;

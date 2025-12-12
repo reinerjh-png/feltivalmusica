@@ -3,20 +3,39 @@
 
 .galeria {
     @include m.contenedor;
+
+    h3 {
+        color: v.$light;
+    }
+
     &-imagenes {
-        @include m.grid(1, 2rem);
+        @include m.grid(2, 1.5rem);
+
         @include m.telefono {
             @include m.grid(2, 2rem);
         }
+
         @include m.tablet {
             @include m.grid(3, 2rem);
         }
+
         @include m.desktop {
             @include m.grid(4, 2rem);
         }
+
         img {
-            height: 20rem;
+            height: 22rem;
             object-fit: cover;
+            border-radius: 1.5rem;
+            cursor: pointer;
+            transition: transform v.$transition-normal, box-shadow v.$transition-normal;
+            position: relative;
+
+            &:hover {
+                transform: scale(1.05);
+                box-shadow: v.$shadow-glow;
+                z-index: 10;
+            }
         }
     }
 }
@@ -24,38 +43,58 @@
 .modal {
     position: fixed;
     inset: 0;
-    background-color: rgba(v.$negro, 0.5);
+    background-color: rgba(v.$dark, 0.9);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     display: grid;
     place-items: center;
-    animation: fadeIn ease-in 0.5s;
+    z-index: 1000;
+    padding: 2rem;
+    animation: fadeIn ease-out 0.3s;
 
     &.fade-out {
-        animation: fadeOut ease-in 0.5s;
+        animation: fadeOut ease-out 0.3s;
     }
 
     img {
-        max-width: 100rem;
+        max-width: 90vw;
+        max-height: 85vh;
+        object-fit: contain;
+        border-radius: 1rem;
+        box-shadow: v.$shadow-lg;
     }
 }
 
 .btn-cerrar {
-    width: 4rem;
-    height: 4rem;
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    width: 5rem;
+    height: 5rem;
     border-radius: 50%;
-    background-color: v.$blanco;
+    background: v.$gradient-primary;
     border: none;
-    color: v.$negro;
+    color: v.$light;
     display: grid;
     place-items: center;
     font-weight: 700;
+    font-size: 2rem;
     cursor: pointer;
+    transition: transform v.$transition-fast, box-shadow v.$transition-fast;
+    box-shadow: v.$shadow-md;
+
+    &:hover {
+        transform: scale(1.1) rotate(90deg);
+        box-shadow: v.$shadow-glow;
+    }
 }
 
 @keyframes fadeIn {
     0% {
         opacity: 0;
     }
-    100%  {
+
+    100% {
         opacity: 1;
     }
 }
@@ -64,7 +103,8 @@
     0% {
         opacity: 1;
     }
-    100%  {
+
+    100% {
         opacity: 0;
     }
 }

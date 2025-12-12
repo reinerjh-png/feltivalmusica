@@ -3,57 +3,150 @@
 html {
     font-size: 62.5%;
     box-sizing: border-box;
-    scroll-padding-top: 0rem;
+    scroll-padding-top: 8rem;
+    scroll-behavior: smooth;
 }
-*, 
+
+*,
 *:before,
 *:after {
     box-sizing: inherit;
 }
+
 body {
     font-family: v.$fuente_principal;
     font-optical-sizing: auto;
     font-style: normal;
-    color: v.$negro;
+    color: v.$light;
     font-size: 2rem;
+    background-color: v.$dark;
+    line-height: 1.6;
+    overflow-x: hidden;
 
     &.overflow-hidden {
         overflow: hidden;
     }
 }
+
 p {
     font-size: 2rem;
-    color: v.$negro;
-    line-height: 1.5;
+    color: v.$light-muted;
+    line-height: 1.7;
+    margin-bottom: 2rem;
 }
+
 .contenedor {
     width: 95%;
     max-width: 120rem;
     margin: 0 auto;
 }
+
 a {
     text-decoration: none;
+    color: v.$secondary;
+    transition: color v.$transition-fast;
+
+    &:hover {
+        color: v.$primary;
+    }
 }
-h1, h2, h3 {
-    margin: 0 0 5rem 0;
+
+h1,
+h2,
+h3 {
+    margin: 0 0 3rem 0;
     font-weight: 900;
+    color: v.$light;
+    line-height: 1.2;
 }
+
 h1 {
     font-size: 4rem;
+    background: v.$gradient-primary;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
+
 h2 {
     font-size: 4.6rem;
 }
+
 h3 {
-    font-size: 6rem;
+    font-size: 5rem;
     text-align: center;
+    margin-bottom: 5rem;
+
+    &::after {
+        content: '';
+        display: block;
+        width: 8rem;
+        height: 4px;
+        background: v.$gradient-primary;
+        margin: 2rem auto 0;
+        border-radius: 2px;
+    }
 }
+
 img {
     max-width: 100%;
     width: 100%;
     height: auto;
     display: block;
 }
-body > section {
-    padding: 10rem 0
+
+body>section {
+    padding: 10rem 0;
+    position: relative;
+}
+
+// Utilidades Glassmorphism
+.glass {
+    background: rgba(v.$dark-card, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(v.$light, 0.1);
+}
+
+// Animaciones
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 20px rgba(v.$primary, 0.4);
+    }
+
+    50% {
+        transform: scale(1.02);
+        box-shadow: 0 0 40px rgba(v.$neon-pink, 0.6);
+    }
+}
+
+@keyframes glow {
+
+    0%,
+    100% {
+        text-shadow: 0 0 20px rgba(v.$primary, 0.5);
+    }
+
+    50% {
+        text-shadow: 0 0 40px rgba(v.$neon-pink, 0.8);
+    }
+}
+
+.animate-fadeIn {
+    animation: fadeInUp 0.8s ease-out forwards;
 }

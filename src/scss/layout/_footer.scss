@@ -1,11 +1,27 @@
 @use 'base/variables' as v;
+@use 'base/mixins' as m;
 
 .footer {
-    background-color: v.$rosa;
-    padding: 2rem 0;
+    background: linear-gradient(90deg,
+            v.$dark-surface,
+            v.$dark,
+            v.$dark-surface );
+    padding: 4rem 0;
+    border-top: 1px solid rgba(v.$primary, 0.2);
+
     p {
         margin: 0;
-        color: v.$blanco;
+        color: v.$light-muted;
         text-align: center;
+        font-size: 1.6rem;
+        letter-spacing: 1px;
+
+        &::before {
+            content: '🎵 ';
+        }
+
+        &::after {
+            content: ' 🎵';
+        }
     }
 }

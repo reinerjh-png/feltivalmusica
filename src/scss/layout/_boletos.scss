@@ -2,75 +2,180 @@
 @use 'base/mixins' as m;
 
 .contenedor-boletos {
-    background-color: v.$verde;
+    background: linear-gradient(180deg,
+            v.$dark 0%,
+            v.$dark-surface 50%,
+            v.$dark 100%);
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background:
+            radial-gradient(circle at 30% 50%, rgba(v.$primary, 0.1) 0%, transparent 50%),
+            radial-gradient(circle at 70% 50%, rgba(v.$neon-pink, 0.08) 0%, transparent 50%);
+        pointer-events: none;
+    }
+
     h3 {
-        color: v.$blanco;
+        color: v.$light;
+        position: relative;
+        z-index: 1;
     }
 
     .boletos {
         @include m.contenedor;
+        position: relative;
+        z-index: 1;
+
         @include m.tablet {
-            @include m.grid(2);
+            @include m.grid(2, 4rem);
         }
     }
 }
 
 .pase {
-    transition: transform .3s ease-in-out;
+    position: relative;
+    border-radius: 2rem;
+    overflow: hidden;
+    background: v.$gradient-card;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(v.$primary, 0.2);
+    transition: transform v.$transition-normal, box-shadow v.$transition-normal;
+    margin-bottom: 3rem;
+
+    &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: 2rem;
+        padding: 2px;
+        background: v.$gradient-primary;
+        -webkit-mask:
+            linear-gradient(#fff 0 0) content-box,
+            linear-gradient(#fff 0 0);
+        mask:
+            linear-gradient(#fff 0 0) content-box,
+            linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        opacity: 0.5;
+        transition: opacity v.$transition-normal;
+    }
+
     &:hover {
-        transform: scale(1.1);
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 20px 60px rgba(v.$primary, 0.3);
+
+        &::before {
+            opacity: 1;
+        }
     }
 
     &-nombre {
-        font-size: 3.6rem;
+        font-size: 3rem;
         font-weight: 900;
         text-align: center;
-        color: v.$blanco;
+        color: v.$light;
+        padding: 3rem 2rem 2rem;
+        margin: 0;
+        background: transparent;
     }
+
     &-header,
     &-footer {
-        padding: .5rem;
+        padding: 1rem 2rem;
 
         p {
             text-align: center;
-            color: v.$blanco;
+            color: v.$light;
             margin: 0;
         }
     }
+
     &-header {
-        background-color: v.$rosa;
+        background: v.$gradient-primary;
+
         p {
             text-transform: uppercase;
-            font-size: 2.2rem;
+            font-size: 1.8rem;
+            font-weight: 600;
             padding: 1rem 0;
+            letter-spacing: 2px;
         }
     }
+
     &-body {
-        background-color: v.$blanco;
+        background: rgba(v.$dark, 0.5);
+        padding: 1rem 0;
+
         ul {
             @include m.resetear-lista;
-            
+
             li {
-                padding: 2rem;
-                border-bottom: 1px solid #e1e1e1;
+                padding: 1.8rem 3rem;
+                color: v.$light-muted;
+                border-bottom: 1px solid rgba(v.$light, 0.05);
+                transition: all v.$transition-fast;
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+
+                &::before {
+                    content: '✓';
+                    color: v.$secondary;
+                    font-weight: 700;
+                }
+
+                &:last-child {
+                    border-bottom: none;
+                }
+
+                &:hover {
+                    background: rgba(v.$primary, 0.1);
+                    color: v.$light;
+                    padding-left: 3.5rem;
+                }
             }
         }
     }
+
     &-footer {
-        background-color: v.$blanco;
-        padding: 3rem;
+        background: rgba(v.$dark, 0.5);
+        padding: 2.5rem;
 
         p {
-            font-size: 2.8rem;
+            font-size: 3.2rem;
             font-weight: 900;
-            background-color: v.$morado;
-            padding: 1rem 0;
+            background: v.$gradient-secondary;
+            padding: 1.5rem 0;
             border-radius: 1rem;
             cursor: pointer;
+            transition: all v.$transition-normal;
+            box-shadow: v.$shadow-md;
+
             &:hover {
-                background-color: darken(v.$morado, 20);
+                transform: scale(1.05);
+                box-shadow: 0 10px 40px rgba(v.$secondary, 0.4);
             }
         }
     }
 }
 
+// Second card special styling
+.pase:nth-child(2) {
+    .pase-header {
+        background: v.$gradient-secondary;
+    }
+
+    .pase-footer p {
+        background: v.$gradient-primary;
+
+        &:hover {
+            box-shadow: 0 10px 40px rgba(v.$neon-pink, 0.4);
+        }
+    }
+}

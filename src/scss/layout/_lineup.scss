@@ -2,55 +2,133 @@
 @use 'base/mixins' as m;
 
 .lineup {
-    background-color: v.$rosa;
-    h3, 
+    background: linear-gradient(180deg,
+            v.$dark-surface 0%,
+            v.$dark 50%,
+            v.$dark-surface 100%);
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background:
+            radial-gradient(circle at 10% 20%, rgba(v.$primary, 0.15) 0%, transparent 40%),
+            radial-gradient(circle at 90% 80%, rgba(v.$neon-pink, 0.1) 0%, transparent 40%);
+        pointer-events: none;
+    }
+
+    h3 {
+        color: v.$light;
+        position: relative;
+        z-index: 1;
+    }
+
     .dia {
         text-align: center;
-        color: v.$blanco;
-    }
-    .dia {
-        font-size: 3rem;
+        color: v.$light;
+        font-size: 2.6rem;
+        font-weight: 700;
         text-transform: uppercase;
+        letter-spacing: 3px;
+        margin: 4rem 0 2rem;
+        position: relative;
+        z-index: 1;
+
+        &::before {
+            content: '🎧';
+            margin-right: 1rem;
+        }
     }
 }
 
 .escenarios-contenedor {
     @include m.contenedor;
+    position: relative;
+    z-index: 1;
+
     @include m.tablet {
-        @include m.grid(2);
+        @include m.grid(2, 3rem);
     }
 }
+
 .escenario {
-    padding-top: 2rem;
+    padding: 2rem;
+    border-radius: 2rem;
+    margin-bottom: 2rem;
+    transition: transform v.$transition-normal, box-shadow v.$transition-normal;
+
+    &:hover {
+        transform: translateY(-5px);
+    }
+
     .nombre-escenario {
-        font-size: 3rem;
+        font-size: 2.6rem;
         font-weight: 900;
         text-transform: uppercase;
         text-align: center;
+        margin-bottom: 2rem;
+        letter-spacing: 2px;
+        color: v.$dark;
     }
 }
 
 .calendario {
     @include m.resetear-lista;
+    border-radius: 1.5rem;
+    overflow: hidden;
 
     li {
-        padding: 2.5rem;
-        font-weight: 700;
+        padding: 2rem 2.5rem;
+        font-weight: 600;
+        transition: all v.$transition-fast;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        color: v.$dark;
+
+        &::before {
+            content: '🎵';
+            font-size: 1.4rem;
+        }
+
         span {
             font-weight: 400;
+        }
+
+        &:hover {
+            padding-left: 3rem;
+            background: rgba(v.$dark, 0.1) !important;
         }
     }
 }
 
 .bg-amarillo {
-    background-color: v.$amarillo;
+    background: linear-gradient(145deg, v.$accent, darken(v.$accent, 10%));
+    box-shadow: 0 10px 40px rgba(v.$accent, 0.3);
+
+    &:hover {
+        box-shadow: 0 15px 50px rgba(v.$accent, 0.4);
+    }
+
     li:nth-child(odd) {
-        background-color: lighten(v.$amarillo, 5%);
+        background-color: rgba(v.$light, 0.15);
     }
 }
+
 .bg-verde {
-    background-color: v.$verde;
+    background: linear-gradient(145deg, v.$secondary, v.$secondary-dark);
+    box-shadow: 0 10px 40px rgba(v.$secondary, 0.3);
+
+    &:hover {
+        box-shadow: 0 15px 50px rgba(v.$secondary, 0.4);
+    }
+
     li:nth-child(odd) {
-        background-color: lighten(v.$verde, 5%);
+        background-color: rgba(v.$light, 0.15);
     }
 }
